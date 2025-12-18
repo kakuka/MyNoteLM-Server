@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyNoteLM · 桌面版 NotebookLM 替代</title>
+    <meta name="description" content="MyNoteLM 是一个开源的、桌面版本的 Google NotebookLM 替代，帮助你构建私有化的多文档知识工作站。">
+    <style>
+        :root {
+            color-scheme: light dark;
+            font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+            --bg: #f8fafc;
+            --card: #ffffffcc;
+            --text: #111827;
+            --muted: #6b7280;
+            --brand: #2563eb;
+            --brand-dark: #1d4ed8;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            background: radial-gradient(circle at top right, #dbeafe, #eff6ff 55%, var(--bg));
+            color: var(--text);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 48px 28px 120px;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+        header nav a {
+            margin-left: 18px;
+            text-decoration: none;
+            font-weight: 500;
+            color: var(--muted);
+        }
+        header nav a:hover {
+            color: var(--brand);
+        }
+        .badge {
+            background: #e0edff;
+            color: var(--brand);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .hero {
+            margin-top: 64px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            align-items: center;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 58px);
+            margin: 18px 0;
+            line-height: 1.15;
+        }
+        .hero p {
+            font-size: 18px;
+            color: var(--muted);
+        }
+        .cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .cta a {
+            padding: 14px 22px;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .cta-primary {
+            background: var(--brand);
+            color: #fff;
+            box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25);
+        }
+        .cta-primary:hover {
+            background: var(--brand-dark);
+        }
+        .cta-secondary {
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            color: var(--text);
+            background: transparent;
+        }
+        .hero-card {
+            background: var(--card);
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+            backdrop-filter: blur(8px);
+        }
+        .hero-card img {
+            width: 100%;
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+        .section {
+            margin-top: 96px;
+        }
+        .section h2 {
+            margin-bottom: 18px;
+            font-size: 32px;
+        }
+        .section p {
+            color: var(--muted);
+            max-width: 720px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-top: 36px;
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .feature-card h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+        }
+        .feature-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+        .timeline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 24px;
+        }
+        .timeline-step {
+            flex: 1;
+            min-width: 220px;
+            border-left: 3px solid var(--brand);
+            padding-left: 16px;
+        }
+        .timeline-step span {
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            color: var(--brand);
+        }
+        footer {
+            margin-top: 120px;
+            padding: 48px 0 24px;
+            border-top: 1px solid rgba(148, 163, 184, 0.25);
+            color: var(--muted);
+            text-align: center;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: radial-gradient(circle at top right, #0f172a, #020617 60%, #020617);
+                --text: #f9fafb;
+                --muted: #94a3b8;
+                --card: rgba(15, 23, 42, 0.9);
+            }
+            .feature-card, .hero-card {
+                background: rgba(15, 23, 42, 0.85);
+            }
+            .cta-secondary {
+                color: var(--muted);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div style="font-weight:700;font-size:20px;">MyNoteLM</div>
+            <nav>
+                <a href="#feature">特性</a>
+                <a href="#workflow">工作流</a>
+                <a href="#opensource">开源</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div>
+                <span class="badge">
+                    <span>🚀</span>
+                    桌面版 NotebookLM 替代
+                </span>
+                <h1>构建你的私有 AI 笔记实验室</h1>
+                <p>
+                    MyNoteLM 是一个开源项目，将 NotebookLM 的核心体验带到本地桌面环境。
+                    连接任意文档、PDF、网页和数据库，获得高速、私密、可审计的多模态知识助理。
+                </p>
+                <div class="cta">
+                    <a class="cta-primary" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub 源码</a>
+                    <a class="cta-secondary" href="#workflow">查看工作流</a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="MyNoteLM 桌面应用预览">
+                <p style="margin-top:16px;color:var(--muted);">所有数据留在本地，构建自定义模型记忆和提示模板。</p>
+            </div>
+        </section>
+
+        <section id="feature" class="section">
+            <h2>为什么选择 MyNoteLM？</h2>
+            <p>为研究者、团队和创作者打造的桌面知识工作站，在离线环境也能保证可控、可靠的 NotebookLM 体验。</p>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>私有部署</h3>
+                    <p>所有数据本地存储，可接入企业内网模型或开源大模型，满足合规需求。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>多文档脑图</h3>
+                    <p>通过语义索引将笔记、PDF、网页、数据库统一联结，快速生成研究摘要和引用。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>插件化工作台</h3>
+                    <p>提供 NotebookLM 风格的提示模板、引用追踪、音频转写等插件，按需组合。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>协作与回溯</h3>
+                    <p>可将会话、生成内容与原始资料同步到 Git 或云端，形成可追踪的知识资产。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow" class="section">
+            <h2>典型工作流</h2>
+            <div class="timeline">
+                <div class="timeline-step">
+                    <span>步骤 1</span>
+                    <h3>导入你的资料</h3>
+                    <p>拖入 PDF、DOCX、网页片段或数据库连接，MyNoteLM 自动生成向量化索引。</p>
+                </div>
+                <div class="timeline-step">
+                    <span>步骤 2</span>
+                    <h3>启动 Notebook</h3>
+                    <p>选择模板或自定义提示，唤起 AI 助理，实时引用原文并生成结构化洞见。</p>
+                </div>
+                <div class="timeline-step">
+                    <span>步骤 3</span>
+                    <h3>同步与分享</h3>
+                    <p>将结论导出为 Markdown、PDF 或同步 Git，维持完整的审计与协作记录。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="opensource" class="section">
+            <h2>坚持开源的桌面 AI 平台</h2>
+            <p>MyNoteLM 采用 MIT 许可证，你可以自由修改、复刻并自托管。欢迎为 UI、模型适配、同步后端等模块贡献代码，一起构建真正开放的 NotebookLM 体验。</p>
+            <div class="cta" style="margin-top:24px;">
+                <a class="cta-primary" href="https://github.com" target="_blank" rel="noopener noreferrer">Star 项目</a>
+                <a class="cta-secondary" href="mailto:hi@mynotelm.dev">加入社区</a>
+            </div>
+        </section>
+
+        <footer>
+            © <span id="year"></span> MyNoteLM. 开源、桌面、可信赖的 NotebookLM 替代方案。
+        </footer>
+    </div>
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
